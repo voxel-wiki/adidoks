@@ -46,7 +46,13 @@
       {% if section.extra.list %}
         {% for val in section.extra.list %}
         <div class="col-lg-5">
-          <h2 class="h4">{{ val.title }}</h2>
+          <h2 class="h4">
+            {% if val.link is not undefined and val.link is string %}
+              <a href="{{ val.link | safe }}">{{ val.title }}</a>
+            {% else %}
+              {{ val.title }}
+            {% endif %}
+          </h2>
           <p>{{ val.content | safe }}</p>
         </div>
         {% endfor %}
