@@ -1,6 +1,6 @@
 # Zola Theme AdiDoks
 
-AdiDoks is a mordern documentation theme, which is a port of the Hugo
+AdiDoks is a modern documentation theme, which is a port of the Hugo
 theme [Doks](https://github.com/h-enk/doks) for Zola.
 
 ## Demo
@@ -9,7 +9,7 @@ theme [Doks](https://github.com/h-enk/doks) for Zola.
 
 ## Requirements
 
-Before using the theme, you need to install the [Zola](https://www.getzola.org/documentation/getting-started/installation/) ≥ 0.13.0.
+Before using the theme, you need to install the [Zola](https://www.getzola.org/documentation/getting-started/installation/) ≥ 0.15.0.
 
 ## Quick Start
 
@@ -52,7 +52,7 @@ git submodule add https://github.com/aaranxu/adidoks.git themes/adidoks
 
 ### Step 3: Configuration
 
-Enable the theme in your `config.toml` in the site derectory:
+Enable the theme in your `config.toml` in the site directory:
 
 ```toml
 theme = "adidoks"

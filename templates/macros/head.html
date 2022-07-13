@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="favicon-32x32.png") | safe }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="favicon-16x16.png") | safe }}">
   {% if not config.extra.is_netlify %}
-    <link rel="manifest" href="{{ get_url(path="site.webmanifest") | safe }}">
+    <link rel="manifest" href="{{ get_url(path="site.webmanifest") | safe }}" crossorigin>
   {% endif %}
 {% endmacro %}
 
@@ -64,7 +64,17 @@
 
 {% if config.extra.open.enable %}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ config.extra.open.image }}">
+  {% if page.extra.images %}
+    {% for image in page.extra.images %}
+      <meta property="twitter:image" content="{{ get_url(path=image) | safe }}">
+    {% endfor %}
+  {% elif section.extra.images %}
+    {% for image in section.extra.images %}
+      <meta property="twitter:image" content="{{ get_url(path=image) | safe }}">
+    {% endfor %}
+  {% elif config.extra.open.image %}
+    <meta name="twitter:image" content="{{ config.base_url | safe }}/{{ config.extra.open.image }}">
+  {% endif %}
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
   <meta name="twitter:site" content="@{{ config.extra.open.twitter_site }}">
@@ -84,7 +94,7 @@
       <meta property="og:image" content="{{ get_url(path=image) | safe }}">
     {% endfor %}
   {% elif config.extra.open.image %}
-    <meta property="og:image" content="{{ config.extra.open.image }}">
+    <meta property="og:image" content="{{ config.base_url | safe }}/{{ config.extra.open.image }}">
   {% endif %}
 
   <meta property="og:updated_time" content="{{ updated_time }}">
@@ -246,4 +256,14 @@
     ]
   }
 </script>
+
+{% if config.extra.ganalytics %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{config.extra.ganalytics}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{config.extra.ganalytics}}');
+</script>
+{% endif %}
 {% endmacro %}
